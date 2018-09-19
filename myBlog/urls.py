@@ -26,7 +26,9 @@ urlpatterns = [
     path(r'articles/<int:id>/',blog_views.detail,name='detail'),
     path(r'summernote/',include('django_summernote.urls')),
     path(r'jet/',include('jet.urls','jet')),
-    path(r'jet/dashboard/',include('jet.dashboard.urls','jet-dashboard'))
+    path(r'jet/dashboard/',include('jet.dashboard.urls','jet-dashboard')),
+    path(r'tag/<str:tag>/',blog_views.search_tag,name='search_tag'),
+    path(r'category/<int:id>/',blog_views.search_category,name='category_menu')
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

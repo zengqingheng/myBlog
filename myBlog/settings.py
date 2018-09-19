@@ -179,3 +179,24 @@ STATICFILES_DIRS = [
 ]
 MEDIA_URL = '/media/'
 MEDIA_ROOT=os.path.join(BASE_DIR,'media/')
+
+#是否展开所有菜单
+JET_SIDE_MENU_COMPACT = False
+
+JET_SIDE_MENU_ITEMS = [
+    {
+        'label':'内容管理','app_label':'blog','items':[
+        {'name':'article'},
+        {'name':'tag'},
+        {'name':'category'},
+    ]},
+    {
+        'label':'附件管理','app_label':'django_summernote','items':[
+        {'label':'附件列表','name':'attachment'},
+    ]},
+    {
+        'label':'权限管理','items':[
+        {'name':'auth.user','permissions':['auth.user']},
+        {'name':'auth.group','permissions':['auth.user']},
+    ]},
+]
