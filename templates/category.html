@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    <div class="posts">
-        {% for post in post_list %}
+  <h1 class="content-subhead">分类:&nbsp;<span>{{ category }}</span><br><br></h1>
+  <div class="blog-post">
+    {% for post in post_list %}
             <section class="post">
                 <header class="post-header">
                     <img width="48" height="48" alt="Tilo Mitra's avatar" class="post-avatar" src='{% static "image/作者头像.jpg" %}'>
@@ -26,8 +27,8 @@
             <h1 class="content-subhead"></h1>
             </section>
         {% endfor %}
-    </div><!-- /.blog-post -->
-    {% if post_list.object_list and post_list.paginator.num_pages > 1 %}
+  </div><!-- /.blog-post -->
+  {% if post_list.object_list and post_list.paginator.num_pages > 1 %}
         <div>
             {% if post_list.has_previous %}
                 <a class="footer" href="?page={{ post_list.previous_page_number }}" style="text-decoration: none; float: left;">
@@ -40,5 +41,5 @@
                 </a>
             {% endif %}
         </div>
-    {% endif %}
+  {% endif %}
 {% endblock %}
