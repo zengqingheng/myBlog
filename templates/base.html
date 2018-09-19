@@ -18,10 +18,13 @@
             <h2 class="brand-tagline">To be or no to be</h2>
             <nav class="nav">
                 <ul class="nav-list">
-                    <li class="nav-item">
-                        {% for category in category_list %}
-                            <a class="pure-button" href="{% url 'category_menu' id=category.id %}" style="text-decoration: none">{{ category }}</a>
-                        {% endfor %}&nbsp;
+                    <li class="nav-item">#原来是用category分类列表放在base里面，现在改为tag
+                        {% for tag_label in tag_list %}
+                            <a class="pure-button" href="{% url 'search_tag' tag=tag_label %}" style="text-decoration: none">{{ tag_label }}</a>
+                        {% endfor %}
+{#                        {% for category in category_list %}#}
+{#                            <a class="pure-button" href="{% url 'category_menu' id=category.id %}" style="text-decoration: none">{{ category }}</a>#}
+{#                        {% endfor %}&nbsp;#}
                     </li>
                 </ul>
                 <br>
