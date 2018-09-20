@@ -18,7 +18,8 @@
             <h2 class="brand-tagline">To be or no to be</h2>
             <nav class="nav">
                 <ul class="nav-list">
-                    <li class="nav-item">#原来是用category分类列表放在base里面，现在改为tag
+{#                原来是用category分类列表放在base里面，现在改为tag#}
+                    <li class="nav-item">
                         {% for tag_label in tag_list %}
                             <a class="pure-button" href="{% url 'search_tag' tag=tag_label %}" style="text-decoration: none">{{ tag_label }}</a>
                         {% endfor %}
