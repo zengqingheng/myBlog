@@ -29,6 +29,17 @@
                     </li>
                 </ul>
                 <br>
+                <h3 class="brand-tagline" style="margin: 2%">文章归档</h3>
+                <ul>
+                    {% for m in months %}
+                        <li>
+                            <a class="pure-button" href="{% url 'archives' year=m.year month=m.month %}" style="text-decoration: none">{{ m | date:'Y年m月' }}</a>
+                        </li>
+                    {% empty %}
+                        暂无归档！
+                    {% endfor %}
+                </ul>
+            <br>
                 <ul class="nav-list">
                     <li>
                         <a href="#" style="text-decoration: none">
@@ -49,7 +60,7 @@
         </div>
     </div>
 
-
+<!-- 文章列表 -->
     <div class="content pure-u-1 pure-u-md-3-4">
         <div>
             {% block content %}
