@@ -57,5 +57,24 @@
         </div>
     </div>
 </div>
+{#回到顶部#}
+<div class="go-top">
+    <div class="arrow"></div>
+    <div class="stick"></div>
+</div>
+<script type="text/javascript" src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<script>
+    $(function (){
+        $(window).scroll(function () {
+            if ($(window).scrollTop()>1000)
+                $('div.go-top').show();
+            else
+                $('div.go-top').hide();
+        });
+        $('div.go-top').click(function () {
+            $('html,body').animate({scrollTop:0},500);
+        });
+    });
+</script>
 </body>
 </html>
