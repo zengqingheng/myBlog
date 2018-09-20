@@ -28,7 +28,8 @@ urlpatterns = [
     path(r'jet/',include('jet.urls','jet')),
     path(r'jet/dashboard/',include('jet.dashboard.urls','jet-dashboard')),
     path(r'tag/<str:tag>/',blog_views.search_tag,name='search_tag'),
-    path(r'category/<int:id>/',blog_views.search_category,name='category_menu')
+    path(r'category/<int:id>/',blog_views.search_category,name='category_menu'),
+    path(r'archives/<str:year>/<str:month>',blog_views.archives,name='archives'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
