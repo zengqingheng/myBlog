@@ -24,11 +24,21 @@ def home(request):
 def detail(request,id):
     try:
         post = Article.objects.get(id=str(id))
-        post.viewed()
+        print('post:',post,type(post))
         tags = post.tags.all()
+        next_post = post.nextArticle()
+        prev_post = post.prevArticle()
+        print('prev_post:',prev_post,type(prev_post))
+        print('next_post:',next_post,type(next_post))
     except Article.DoesNotExist:
         raise Http404
-    return render(request,'post.html',{'post':post,'tags':tags,'category_list':categories})
+    return render(request,'post.html',
+                  {'post':post,
+                   'tags':tags,
+                   'category_list':categories,
+                   'next_post':next_post,
+                   'prev_post':prev_post,
+                   })
 
 categories = Category.objects.all() # 获取全部分类对象
 tags = Tag.objects.all() # 获取全部标签对象
