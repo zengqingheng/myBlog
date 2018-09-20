@@ -57,7 +57,7 @@ class Article(models.Model):
         return Article.objects.filter(id__gt=self.id,status='p',pub_time__isnull=False).first()
     #上一篇 lt是小于的意思
     def prevArticle(self):
-        return Article.objects.first(id__lt=self.id,status='p',pub_time__isnull=False).first()
+        return Article.objects.filter(id__lt=self.id,status='p',pub_time__isnull=False).first()
 
     class Meta:
         ordering = ['-pub_time'] # 按文章发布时间降序来排列
