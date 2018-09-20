@@ -24,12 +24,9 @@ def home(request):
 def detail(request,id):
     try:
         post = Article.objects.get(id=str(id))
-        print('post:',post,type(post))
         tags = post.tags.all()
         next_post = post.nextArticle()
         prev_post = post.prevArticle()
-        print('prev_post:',prev_post,type(prev_post))
-        print('next_post:',next_post,type(next_post))
     except Article.DoesNotExist:
         raise Http404
     return render(request,'post.html',
@@ -46,7 +43,6 @@ tags = Tag.objects.all() # 获取全部标签对象
 def search_category(request,id): # 分类搜索
     posts = Article.objects.filter(category_id=str(id))
     category = categories.get(id=str(id))
-    print('category:',category,type(category))
     paginator = Paginator(posts,settings.PAGE_NUM)
     try:
         page = request.GET.get('page')
@@ -60,9 +56,7 @@ def search_category(request,id): # 分类搜索
 def search_tag(request,tag):
     #posts = Article.objects.filter(tags__name__contains=tag)# contains是将相似的数据提取出来，比如设置标签C,会把所有带C字母的标签全部查询出来
     posts = Article.objects.filter(tags__name__contains=tag)
-    print('posts:',posts)
     tag = tags.get(name=tag)
-    print('tag2:', tag, type(tag))
     paginator = Paginator(posts,settings.PAGE_NUM)
     try:
         page = request.GET.get('page')
