@@ -1,11 +1,13 @@
+# -*- coding : utf-8 -*-
 from django.shortcuts import render
 from apps.blog.models import Article,Category,Tag
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from django.http import Http404
 from django.conf import settings
-
+import logging
 # Create your views here.
 
+logger = logging.getLogger('blog.views')
 def home(request):
     """
     :paginator 分页程序
@@ -17,6 +19,7 @@ def home(request):
         post_list = paginator.page(page)
     except PageNotAnInteger:
         post_list = paginator.page(1)
+        logger.error(PageNotAnInteger)
     except EmptyPage:
         post_list = paginator.page(paginator.num_pages)
     return render(request,'home.html',{'post_list':post_list,'category_list':categories,'tag_list':tags})

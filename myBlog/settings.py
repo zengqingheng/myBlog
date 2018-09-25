@@ -85,7 +85,7 @@ SUMMERNOTE_CONFIG = {
 
     'styleWithSpan':False,
 
-    'wodth':'80%',
+    'width':'80%',
     'height':'480',
 
     'lang':'zh-CN',
@@ -200,3 +200,77 @@ JET_SIDE_MENU_ITEMS = [
         {'name':'auth.group','permissions':['auth.user']},
     ]},
 ]
+
+#日志器
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'standard': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+    },
+    'filters': {
+    },
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'include_html':True,
+        },
+        'default': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': './log/all.log',
+            'maxBytes':1024*1024*5,
+            'backupCount':5,
+            'formatter':'standard',
+        },
+        'error':{
+            'level': 'ERROR',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': './log/error.log',
+            'maxBytes':1024*1024*5,
+            'backupCount':5,
+            'formatter':'standard',
+        },
+        'console':{
+            'level':'DEBUG',
+            'class':'logging.StreamHandler',
+            'formatter':'standard',
+        },
+        'request_handler':{
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': 'log/script.log',
+            'maxBytes':1024*1024*5,
+            'backupCount':5,
+            'formatter':'standard',
+        },
+        'scripts_handler':{
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': 'log/script.log',
+            'maxBytes':1024*1024*5,
+            'backupCount':5,
+            'formatter':'standard',
+        }
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['request_handler'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'scripts':{
+            'handlers':['scripts_handler'],
+            'level':'INFO',
+            'propagate':False,
+        },
+        'blog.views':{
+            'handlers':['default','error'],
+            'level':'DEBUG',
+            'propagate':True
+        },
+    },
+}
